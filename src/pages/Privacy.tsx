@@ -34,7 +34,7 @@ const solanaWeb3JsAdapter = new SolanaAdapter({
     },
   });
 
-function Explore(){
+function Privacy(){
     const { isConnected} = useAppKitAccount();
     //const { connection } = useAppKitConnection();
  
@@ -198,7 +198,7 @@ function Explore(){
             </div>
           </div>
         </div>
-        <section className="section-banner bg-[#24232e33] mb-[50px] max-[1199px]:mb-[35px]">
+ <section className="section-banner bg-[#24232e33] mb-[50px] max-[1199px]:mb-[35px]">
   <div className="container relative flex flex-wrap justify-between items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
     <div
       className="w-full flex flex-wrap aos-init aos-animate"
@@ -208,13 +208,13 @@ function Explore(){
       <div className="w-full px-[12px]">
         <div className="h-[250px] max-[575px]:h-[200px] flex justify-center flex-col items-center text-center" style={{ height: 180 }}>
           <h2 className="text-[32px] font-semibold tracking-[1px] leading-[26px] mb-[15px] max-[1199px]:text-[30px] max-[991px]:text-[28px] max-[767px]:text-[26px] max-[575px]:text-[22px] max-[575px]:mb-[5px]">
-           Explore
+           Privacy
           </h2>
           <div className="infy-breadcrumb">
             <h5 className="flex items-center leading-[1.2]">
               <span className="leading-[1.2] text-[20px]">
                 <a
-                  href="index"
+                  href="/"
                   className="transition-all duration-[0.3s] ease-in-out text-[14px] text-[#bbb] hover:text-[#fff]"
                 >
                   Home
@@ -228,7 +228,7 @@ function Explore(){
                   href="#"
                   className="transition-all duration-[0.3s] ease-in-out text-[14px] text-[#bbb]"
                 >
-                  Create a New File
+                  Privacy & Terms
                 </a>
               </span>
             </h5>
@@ -238,31 +238,46 @@ function Explore(){
     </div>
   </div>
 </section>    
-        <section className="explore-products-sec pt-[50px] max-[1199px]:pt-[35px] pb-[100px] max-[1199px]:pb-[70px]">
+<section className="section-privacy pt-[50px] max-[1199px]:pt-[35px] pb-[100px] max-[1199px]:pb-[70px]">
   <div className="relative flex flex-wrap justify-between items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
-    <div className="w-full flex flex-wrap">
-      <div className="w-full">
-        <div
-          className="infy-explore-products-tabs infy-explore-page"
-          data-aos="fade-up"
-          data-aos-duration={2000}
-        >
+    <div
+      className="w-full flex flex-wrap aos-init aos-animate"
+      data-aos="fade-up"
+      data-aos-duration={2000}
+    >
+      <div className="w-full px-[12px]">
+        <div className="infy-privacy p-[30px] bg-[#24232e80]">
+          <div className="inner-privacy mb-[30px]">
+            <h4 className="mb-[12px] font-Manrope text-[20px] font-semibold leading-[1.3] text-[#e7e7ef]">
+              Privacy Policy
+            </h4>
+            <p className="text-[14px] text-[#c9c9c9] leading-[28px]">
+            We know that your privacy is important to you, and we work hard to earn and keep your trust. NFTAI.live respects your privacy and is committed to protecting your privacy through our compliance with this Privacy Policy (the 'Policy'). The words 'you' and 'your' refer to you as a user of the Website (defined below), either as a visitor, registered customer, or employee of a Company customer.
+            </p>
+            <br />
+            <p>This Policy applies to information we collect on the Website or in emails and other electronic messages between you and the Website, and information gathered when you interact with our advertising on third-party websites if such advertisements include links to this Policy. 
 
-          <div className="tab-content" id="myTabContent">
-            <div className="tab-pane" id="trending">
-              <div className="w-full flex flex-wrap">
-    
-      
-
-              </div>
-            </div>
- 
+This Policy does not apply to information collected by us offline or through any other means, including on any other website operated by the Company or any third party, or information collected by any third party through any application or content (including advertising) that may link to or be accessible from the Website (for further information, see below, 'Third-party Websites'). For the avoidance of doubt, the Company does not control the blockchain protocol on which the various digital assets are deployed or used on and cannot control use of, activity on, or data on those protocols.</p>
+          </div>
+          <div className="inner-privacy">
+            <h4 className="mb-[12px] font-Manrope text-[20px] font-semibold leading-[1.3] text-[#e7e7ef]">
+              Contact
+            </h4>
+            <p className="text-[14px] text-[#c9c9c9] leading-[28px]">
+              For more information about our privacy practices, if you have
+              questions, or if you would like to make a complaint, please
+              contact us by e-mail at 
+              <a href="mailto:info@nftai.live" className="text-[#a487f2]">
+                info@nftai.live
+              </a>
+            </p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 
         <footer className="relative bg-[#24232e33]">
           <div className="flex flex-wrap justify-between items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
@@ -330,7 +345,7 @@ function Explore(){
                       >
                         About
                       </a>
-                    </li>            
+                    </li>             
                     <li>
                       <a
                         href="privacy"
@@ -350,7 +365,7 @@ function Explore(){
                     Community
                   </h4>
                   <ul>
-  
+ 
                     <li>
                       <a
                         href="faq"
@@ -380,11 +395,11 @@ function Explore(){
                   <div className="last-footer-copy flex max-[767px]:block justify-between">
                     <div className="max-[767px]:mb-[10px] max-[767px]:flex max-[767px]:justify-center">
                       <p className="text-[14px]">
-                        © <span id="copyright_year" /> NFTAI, All rights reserved.
+                        © NFTAI, All rights reserved.
                       </p>
                     </div>
                     <div className="privacy-contact-copy max-[767px]:flex max-[767px]:justify-center">
-          
+        
                     </div>
                   </div>
                 </div>
@@ -397,4 +412,4 @@ function Explore(){
     )
 }
 
-export default Explore;
+export default Privacy;

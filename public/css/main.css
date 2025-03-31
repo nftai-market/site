@@ -1,0 +1,117 @@
+html{--default-font-family:var(--font-rajdhani);--heading-font-family:var(--font-nasalization);--color-red:#d6062d;--color-blue:#3834ff;--color-purple:#8940ff;--color-green:#1ded83;--color-yellow:#fffc54;--color-yellow-020:#fffc5433;--color-yellow-010:#ffec411c;--color-sir:#5e66ab;--color-grey-40:#262731;--color-grey-60:#181921;--color-black-10:#111217;--color-black:#000;--color-black-020:#020204;--color-black-500:#5f606a;--color-black-800:#8d8e9a;--color-black-850:#8d8d8d;--color-black-900:#918fa5;--color-black-decorate:#262731a8;--color-brown:#313025;--color-white:#fff;--color-white-070:#ffffffb3;--color-white-080:hsla(0,0%,100%,.8);--color-white-060:hsla(0,0%,100%,.6);--color-white-050:hsla(0,0%,100%,.5);--text-12-font-size:12px;--text-12-line-height:130%;--text-14-font-size:14px;--text-14-line-height:20px;--text-15-font-size:15px;--text-15-line-height:22px;--text-16-font-size:16px;--text-16-line-height:150%;--text-18-font-size:14px;--text-18-line-height:23px;--text-20-font-size:20px;--text-20-line-height:26px;--text-24-font-size:24px;--text-24-line-height:130%;--text-26-font-size:26px;--text-26-line-height:34px;--text-28-font-size:28px;--text-28-line-height:36px;--text-30-font-size:30px;--text-30-line-height:130%;--text-34-font-size:34px;--text-34-line-height:44px;--text-36-font-size:36px;--text-36-line-height:42.77px;--text-40-font-size:40px;--text-40-line-height:44px;--text-44-font-size:44px;--text-44-line-height:46px;--text-56-font-size:56px;--text-56-line-height:56px;--text-64-font-size:64px;--text-64-line-height:64px;--text-80-font-size:80px;--text-80-line-height:80px;font-family:var(--default-font-family);background:#080809;--swiper-pagination-color:hsla(0,0%,100%,.7);--swiper-pagination-bullet-inactive-color:#fff}html .layout{display:grid;align-items:start}@media(min-width:1025px){html .layout{grid-template-columns:280px 1fr}}html .menu{background-color:var(--color-grey-60);grid-column:2/2;height:100vh;width:280px;position:fixed;-webkit-clip-path:polygon(100% 0,100% 5.539%,100% 8.105%,100% 8.105%,99.997% 8.139%,99.989% 8.173%,99.975% 8.206%,99.956% 8.239%,99.931% 8.272%,99.902% 8.305%,99.867% 8.337%,99.826% 8.368%,99.781% 8.399%,99.73% 8.429%,97.591% 9.627%,97.591% 9.627%,97.541% 9.657%,97.495% 9.688%,97.455% 9.719%,97.42% 9.751%,97.39% 9.783%,97.365% 9.816%,97.346% 9.849%,97.333% 9.883%,97.324% 9.917%,97.321% 9.951%,97.321% 13.435%,97.321% 13.435%,97.326% 13.48%,97.341% 13.524%,97.365% 13.568%,97.398% 13.612%,97.44% 13.654%,97.491% 13.695%,97.551% 13.736%,97.62% 13.775%,97.697% 13.812%,97.783% 13.848%,99.539% 14.541%,99.539% 14.541%,99.624% 14.577%,99.702% 14.614%,99.77% 14.653%,99.83% 14.694%,99.881% 14.735%,99.924% 14.777%,99.957% 14.821%,99.981% 14.864%,99.995% 14.909%,100% 14.954%,100% 16.617%,100% 22.156%,100% 44.312%,100% 66.468%,100% 72.007%,100% 88.624%,100% 91.457%,100% 92.658%,100% 92.658%,99.996% 92.7%,99.983% 92.741%,99.962% 92.783%,99.933% 92.824%,99.895% 92.864%,99.85% 92.903%,99.797% 92.941%,99.736% 92.978%,99.667% 93.014%,99.591% 93.049%,99.337% 93.158%,99.337% 93.158%,99.261% 93.193%,99.193% 93.229%,99.132% 93.266%,99.079% 93.305%,99.033% 93.344%,98.996% 93.384%,98.967% 93.425%,98.946% 93.466%,98.933% 93.508%,98.929% 93.55%,98.929% 96.482%,98.929% 96.482%,98.934% 96.528%,98.949% 96.574%,98.975% 96.62%,99.01% 96.664%,99.056% 96.708%,99.111% 96.751%,99.175% 96.792%,99.248% 96.832%,99.331% 96.871%,99.422% 96.907%,99.506% 96.939%,99.506% 96.939%,99.598% 96.976%,99.68% 97.014%,99.754% 97.054%,99.818% 97.096%,99.873% 97.138%,99.918% 97.182%,99.954% 97.227%,99.979% 97.272%,99.995% 97.318%,100% 97.365%,100% 98.541%,100% 100%,2.143% 100%,2.143% 100%,1.795% 99.991%,1.466% 99.966%,1.158% 99.926%,.877% 99.871%,.628% 99.805%,.413% 99.727%,.239% 99.64%,.109% 99.544%,.028% 99.441%,0 99.333%,0 0,100% 0);clip-path:polygon(100% 0,100% 5.539%,100% 8.105%,100% 8.105%,99.997% 8.139%,99.989% 8.173%,99.975% 8.206%,99.956% 8.239%,99.931% 8.272%,99.902% 8.305%,99.867% 8.337%,99.826% 8.368%,99.781% 8.399%,99.73% 8.429%,97.591% 9.627%,97.591% 9.627%,97.541% 9.657%,97.495% 9.688%,97.455% 9.719%,97.42% 9.751%,97.39% 9.783%,97.365% 9.816%,97.346% 9.849%,97.333% 9.883%,97.324% 9.917%,97.321% 9.951%,97.321% 13.435%,97.321% 13.435%,97.326% 13.48%,97.341% 13.524%,97.365% 13.568%,97.398% 13.612%,97.44% 13.654%,97.491% 13.695%,97.551% 13.736%,97.62% 13.775%,97.697% 13.812%,97.783% 13.848%,99.539% 14.541%,99.539% 14.541%,99.624% 14.577%,99.702% 14.614%,99.77% 14.653%,99.83% 14.694%,99.881% 14.735%,99.924% 14.777%,99.957% 14.821%,99.981% 14.864%,99.995% 14.909%,100% 14.954%,100% 16.617%,100% 22.156%,100% 44.312%,100% 66.468%,100% 72.007%,100% 88.624%,100% 91.457%,100% 92.658%,100% 92.658%,99.996% 92.7%,99.983% 92.741%,99.962% 92.783%,99.933% 92.824%,99.895% 92.864%,99.85% 92.903%,99.797% 92.941%,99.736% 92.978%,99.667% 93.014%,99.591% 93.049%,99.337% 93.158%,99.337% 93.158%,99.261% 93.193%,99.193% 93.229%,99.132% 93.266%,99.079% 93.305%,99.033% 93.344%,98.996% 93.384%,98.967% 93.425%,98.946% 93.466%,98.933% 93.508%,98.929% 93.55%,98.929% 96.482%,98.929% 96.482%,98.934% 96.528%,98.949% 96.574%,98.975% 96.62%,99.01% 96.664%,99.056% 96.708%,99.111% 96.751%,99.175% 96.792%,99.248% 96.832%,99.331% 96.871%,99.422% 96.907%,99.506% 96.939%,99.506% 96.939%,99.598% 96.976%,99.68% 97.014%,99.754% 97.054%,99.818% 97.096%,99.873% 97.138%,99.918% 97.182%,99.954% 97.227%,99.979% 97.272%,99.995% 97.318%,100% 97.365%,100% 98.541%,100% 100%,2.143% 100%,2.143% 100%,1.795% 99.991%,1.466% 99.966%,1.158% 99.926%,.877% 99.871%,.628% 99.805%,.413% 99.727%,.239% 99.64%,.109% 99.544%,.028% 99.441%,0 99.333%,0 0,100% 0)}@media(max-width:1024px){html .menu{display:none}}html .content{min-width:0;min-height:100vh;max-width:1160px;margin:0 auto;width:100%;box-sizing:border-box}@media(min-width:1025px){html .content{grid-column:2/3}}@media(max-width:1024px){html .content{padding:60px 20px 20px}}@media(max-width:768px){html .bridge-faq{padding:24px 16px}html .bridge-form{padding:24px 16px;--text-34-font-size:24px;--text-20-font-size:18px;--text-20-line-height:100%}html .footer-link{padding:0 28px}}html .swiper{height:100%}html .scroll::-webkit-scrollbar{height:4px;width:4px}html .scroll::-webkit-scrollbar-track{width:4px;background-color:hsla(0,0%,100%,.16);border:0;border-radius:4px}html .scroll::-webkit-scrollbar-thumb{width:4px;background-color:hsla(0,0%,100%,.12);border:0;border-radius:4px}body{background-color:var(--color-black)}body,button{padding:0;margin:0}button{cursor:pointer;background:none;border:none}button:disabled{cursor:not-allowed}a{font-family:var(--default-font-family);text-decoration:none;color:#3834ff}a:hover .Link{color:var(--color-white)}[role=button]{cursor:pointer}ul{list-style:none}li,ul{padding:0;margin:0}
+ 
+.sc-card-activity {
+    background: #343444;
+    box-shadow: 0px 3px 16px rgba(47, 83, 109, 0.12);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+ display: flex;
+    align-items: center;
+    margin-bottom: 28px;
+    justify-content: flex-start;	
+z-index: 100000;
+    position: relative;
+}	
+ 
+.sc-card-activity .contents {
+    display: flex
+;
+    align-items: center;
+}
+.media {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+.sc-card-activity .contents .media{
+    width: 112px;
+    height: 112px;
+    border-radius: 10px;
+    overflow: hidden;
+    object-fit: cover;
+    margin-right: 29px;
+    flex-shrink: 0;
+}
+.sc-card-activity .contents .infor {
+    margin-top: 3px;
+}
+.sc-card-activity .contents .infor h3 {
+    margin-bottom: 9px;
+    text-transform: capitalize;
+}
+
+.sc-card-activity .contents .infor .status {
+    margin-bottom: 6px;
+}
+.sc-card-activity .contents .infor .status, .sc-card-activity .contents .infor .time {
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--primary-color4);
+}
+.sc-card-activity .contents .infor .author {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--primary-color3);
+    margin: 0 2px;
+}
+.sc-card-activity .button-active.icon {
+    font-family:arial;
+    font-weight: 100;
+    font-size: 19px;
+}
+.sc-card-activity .button-active.icon span{
+	font-size:25px;
+}
+.is_dark .sc-card-activity .button-active {
+    background-color: #14141f;
+}
+.sc-card-activity .button-active {
+     
+    line-height: 68px;
+    text-align: center;
+    background-color: #343444;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    flex-shrink: 0;
+    color: #fff;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.sc-card-activity  img {
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+    -ms-interpolation-mode: bicubic;
+}
+@media only screen and (max-width: 575px) {
+.sc-card-activity .contents {
+  flex-wrap: wrap;
+}
+.page-title-heading .heading{
+  font-size: 35px;
+}
+.sc-card-product {
+  width: 100%;
+}
+.sc-card-activity .button-active.icon {
+        font-size: 15px;
+    }
+.sc-card-activity .button-active.icon span {
+        font-size: 16px;
+    }	
+}

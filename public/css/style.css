@@ -677,6 +677,9 @@ select {
   .infy-banner .infy-buttons-invers {
     margin-top: 10px;
   }
+  
+ 
+}  
 }
 /* Header */
 header {
@@ -1890,4 +1893,7 @@ figure.bids-img a.active i {
   color: #bbb;
   font-size: 13px;
   font-weight: 400;
+}
+#in_mobile_menu{
+	z-index:100000000;
 }

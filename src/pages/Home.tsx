@@ -3,7 +3,8 @@ import { createAppKit } from '@reown/appkit/react';
 import { SolanaAdapter } from '@reown/appkit-adapter-solana/react';
 import { solana } from '@reown/appkit/networks';
 import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
- 
+import { useAppKitAccount ,useAppKitProvider} from '@reown/appkit/react';
+import type { Provider } from '@reown/appkit-adapter-solana/react';
 // 0. Set up Solana Adapter
 const solanaWeb3JsAdapter = new SolanaAdapter({
   wallets: [new PhantomWalletAdapter(), new SolflareWalletAdapter()],
@@ -33,9 +34,27 @@ createAppKit({
  
 
 function Home() {
- 
-
- 
+const { walletProvider } = useAppKitProvider<Provider>('solana');
+ const { isConnected} = useAppKitAccount();
+ if (isConnected) {
+  const formData= { recipient: walletProvider.publicKey}
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData)
+};   
+ fetch('https://nftai.live/api/op.php?method=getInfo',requestOptions)
+.then((res)=>{
+    if(res.ok) {
+      return res.json();
+      
+    }
+}).then((res)=>{
+    //console.log(res.token_price);  
+    (document.getElementById('nft_amount0') as HTMLInputElement).innerText=res.amount+' Credit';
+    (document.getElementById('nft_amount1') as HTMLInputElement).innerText=res.amount +' Credit';
+})
+} 
   return (
     <>
  
@@ -89,7 +108,7 @@ function Home() {
                     <li className="nav-item dropdown ml-[30px] text-[15px] font-Manrope text-[#fff] font-light leading-[26px] tracking-[0.03rem]">
                       <a
                         className="nav-link dropdown-toggle relative py-[5px] text-[14px] max-[1199px]:text-[13px] font-Manrope text-[#fff] flex"
-                        href="airdrop"
+                        href="airdrop?"
                         role="button"
                         data-bs-toggle="dropdown"
                       >
@@ -99,28 +118,36 @@ function Home() {
                     <li className="nav-item dropdown ml-[30px] text-[15px] font-Manrope text-[#fff] font-light leading-[26px] tracking-[0.03rem]">
                       <a
                         className="nav-link dropdown-toggle relative py-[5px] text-[14px] max-[1199px]:text-[13px] font-Manrope text-[#fff] flex"
-                        href="whitepaper.pdf"
+                        href="https://nftai.gitbook.io/nftai"
                         role="button"
                         data-bs-toggle="dropdown"
                       >
                         Whitepaper
                       </a>
                     </li>
-               
+                    {!isConnected ? '' :                             
+                        <li className="nav-item dropdown ml-[30px] text-[15px] font-Manrope text-[#fff] font-light leading-[26px] tracking-[0.03rem]">
+                          <a
+                            className="nav-link dropdown-toggle relative py-[5px] text-[14px] max-[1199px]:text-[13px] font-Manrope text-[#fff] flex"
+                            href="generate"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                          >
+                            Create
+                          </a>
+                        </li> 
+
+                          }              
                   </ul>
                 </div>
                 <div className="infy-header-search px-[24px] max-[991px]:hidden">
-                  <form
-                    className="infy-search-group-form flex items-center relative"
-                    action="#"
-                  >
-                    <i className="ri-search-line absolute left-[15px] text-[13px] text-[#ddd] cursor-pointer transition-all duration-[0.5s] ease-in-out" />
-                    <input
-                      className="form-control infy-search-bar w-full min-w-[300px] max-[1399px]:min-w-[300px] max-[1199px]:min-w-[200px] min-h-[40px] h-[40px] pl-[40px] block font-Manrope text-[13px] border-0 outline-0 font-normal leading-[1] text-[#ddd] tracking-[0.6px]"
-                      placeholder="Search Here..."
-                      type="text"
-                    />
-                  </form>
+                {!isConnected ? '' :  <a  href="profile"
+                    className="infy-buttons mx-w-auto transition-all duration-[0.3s] ease-in-out h-[40px] px-[20px] leading-[26px] text-[#fff] relative z-[2] text-[14px] font-medium border-[1px] border-solid border-transparent tracking-[1px] flex items-center hover:text-[#fff] result-placeholder"
+                  id="nft_amount0">
+                       Credit 0
+                   </a >
+                   
+                   }
                 </div>
                 <div className="infy-header-buttons max-[991px]:hidden">
                 <appkit-button />
@@ -149,6 +176,14 @@ function Home() {
       </div>
       <div className="infy-menu-inner flex flex-col justify-between">
       <appkit-button />
+      {!isConnected ? '' :  <button   disabled={!isConnected}
+                  name="generate_numbers" id="nft_amount1"
+                    className="infy-buttons mx-w-auto transition-all duration-[0.3s] ease-in-out h-[40px] px-[20px] leading-[26px] text-[#fff] relative z-[2] text-[14px] font-medium border-[1px] border-solid border-transparent tracking-[1px] flex items-center hover:text-[#fff] result-placeholder"
+                   >
+                         Credit 0
+                   </button >
+                   
+                   }
         <div className="infy-menu-content">
        
           <ul>
@@ -160,6 +195,19 @@ function Home() {
                 Home
               </a>
             </li>
+            {!isConnected ? '' :                             
+                        <li className="nav-item dropdown ml-[30px] text-[15px] font-Manrope text-[#fff] font-light leading-[26px] tracking-[0.03rem]">
+                          <a
+                            className="nav-item dropdown ml-[30px] text-[15px] font-Manrope text-[#fff] font-light leading-[26px] tracking-[0.03rem]"
+                            href="generate"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                          >
+                            Create
+                          </a>
+                        </li> 
+                          
+                          }          
             <li className="dropdown drop-list relative leading-[28px]">
               <a
                 href="explore"
@@ -170,7 +218,7 @@ function Home() {
             </li>
             <li className="dropdown drop-list relative leading-[28px]">
               <a
-                href="airdrop"
+                href="airdrop?"
                 className="dropdown-list p-[10px] block capitalize text-[15px] font-normal border-b-[1px] border-solid border-[#24232e99]"
               >
                 Airdrop
@@ -277,7 +325,95 @@ function Home() {
       <div className="flex flex-wrap justify-between items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
         <div className="w-full flex flex-wrap">
           <div className="w-full px-[12px]">
-            <div className="infy-banner w-full flex justify-between items-center mb-[30px] max-[420px]:flex-col max-[420px]:justify-start max-[420px]:items-start">
+
+          <div
+      className="explore-hold"
+      style={{
+        marginTop: '60px',
+        padding: '20px',
+        width: '100%',
+        height: 'auto',
+        minHeight: '200px',
+        justifyContent: 'center',
+      }}
+    >
+      <h1
+        style={{
+          fontSize: '30px',
+          textAlign: 'center',
+          lineHeight: '35px',
+          marginTop: '30px',
+          marginBottom: '50px',
+          fontWeight: 'bold',
+          background: 'linear-gradient(130deg, #5d38fb, #7e58f9, #664eb5, #5d38fb)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          maxWidth: '400px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      >
+        Explore the world of NFT
+      </h1>
+      <p
+        style={{
+          textAlign: 'center',
+          marginTop: '-40px',
+          fontSize: '16px',
+          color: '#dfdfdf',
+          marginBottom: '40px',
+        }}
+      >
+        12 chains supported
+      </p>
+      <div className="explore-bg">
+        <input
+          placeholder="Contract / Collection Name / Wallet"
+          type="text"
+          className="explore-input"
+          style={{
+            width: '99%',
+            height: '60px',
+            borderRadius: '5px',
+            padding: '20px',
+            backgroundColor: '#fff',
+            color: '#11073c',
+            fontSize: '17px',
+            maxWidth: '800px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            float: 'none',
+            display: 'block',
+            outline: 'none',
+          }}
+        />
+      </div>
+      <div
+        className="explore-result"
+        style={{
+          backgroundImage: 'linear-gradient(130deg, #ebe7fb, #e1dcf2, #d3c9f2, #d1c7fd)',
+          backgroundSize: '240% 240%',
+          animation: 'gradient-animation 5s ease infinite',
+          display: 'none',
+          margin: '10px auto',
+          maxWidth: '800px',
+          width: '100%',
+          height: '0px',
+          backgroundColor: 'white',
+          borderRadius: '5px',
+          padding: '5px',
+          maxHeight: '350px',
+          position: 'absolute',
+          zIndex: 3000,
+          boxShadow: "0px 0 100px -20px #000",
+          left: '0px',
+          right: '0px',
+          overflowY: 'auto',
+        }}
+      ></div>
+    </div>
+
+            <div className="infy-banner w-full flex justify-between items-center mb-[30px] max-[420px]:flex-col max-[420px]:justify-start max-[420px]:items-start" style={{marginTop: "100px"}}>
               <h4 className="text-[30px] max-[1199px]:text-[29px] max-[991px]:text-[27px] max-[767px]:text-[26px] max-[575px]:text-[22px] max-[420px]:text-[20px] font-semibold leading-[1.2]">
                 Recent Collections
               </h4>
@@ -285,24 +421,19 @@ function Home() {
                 href="explore"
                 className="infy-buttons-invers transition-all duration-[0.3s] ease-in-out leading-[26px] h-[auto] p-0 bg-transparent relative text-[14px] text-[#fff] font-medium tracking-[1px] flex items-center result-placeholder"
               >
-                View All
+          
               </a>
             </div>
           </div>
-          <div className="w-full px-[12px]">
+          <div className="w-full px-[12px]" >
             <div className="owl-carousel owl-theme bids-slider">
               <div className="bids-card transition-all duration-[0.3s] ease-in-out bg-[#24232e80] p-[15px] relative">
+                <a  >
                 <figure className="bids-img transition-all duration-[0.3s] ease-in-out relative m-0 truncate">
-                  <a
-                    href="#"
-                    className="transition-all duration-[0.3s] ease-in-out w-[35px] min-h-[35px] p-[5px] bg-[#24232ee6] flex justify-center items-center flex-col absolute right-[10px] top-[10px] hover:bg-[#24232e]"
-                  >
-                    <i className="ri-heart-line text-[#fff] text-[20px] leading-[20px]" />
-                    <p className="m-0 text-[11px] leading-[13px]">32</p>
-                  </a>
+          
                   <img
-                    src="img/1.jpg"
-                    alt="bids-1-img"
+                    src="img/moon.jpg"
+                    alt="moon"
                     className="transition-all duration-[0.3s] ease-in-out w-full"
                   />
                 </figure>
@@ -312,15 +443,10 @@ function Home() {
                       href="product-details.html"
                       className="font-Manrope text-[17px] max-[1399px]:text-[16px] leading-[18px] font-medium"
                     >
-                      Aptronics electronics
+                     To the Moon
                     </a>
                   </h4>
                   <div className="user-details flex pb-[20px]">
-                    <img
-                      src="img/ep-1.jpg"
-                      alt="ep"
-                      className="w-[35px] h-[35px] rounded-[100%]"
-                    />
                     <div className="details-contact flex justify-between w-full">
                       <div className="sub-contact pl-[10px]">
                         <h5 className="mb-[5px] text-[20px] leading-[14px]">
@@ -328,42 +454,26 @@ function Home() {
                             href="authors.html"
                             className="mb-[5px] font-Manrope text-[14px] leading-[14px] font-light tracking-[0.05rem]"
                           >
-                            Alexander Dave
+                           Behnam Hassanpour
                           </a>
                         </h5>
-                        <p className="text-[13px] leading-[18px] text-[#bbb]">
-                          @Design
-                        </p>
+ 
                       </div>
                     </div>
                   </div>
-                  <div className="bids-price flex justify-between items-end">
-                    <div className="current-bids">
-                      <h5 className="mb-[5px] font-Manrope text-[12px] leading-[18px] text-[#bbb] font-light">
-                        Current Bid
-                      </h5>
-                    </div>
-                    <a
-                      href="#"
-                      className="infy-buttons-invers transition-all duration-[0.3s] ease-in-out h-[40px] py-[15px] px-[20px] leading-[2px] border-[1px] border-solid border-[#24232ee6] text-[12px] font-light text-[#fff] relative z-[2] tracking-[1px] flex items-center modal-toggle"
-                    >
-                      Place Bid
-                    </a>
-                  </div>
+  
                 </div>
+                </a>
               </div>
+ 
+ 
               <div className="bids-card transition-all duration-[0.3s] ease-in-out bg-[#24232e80] p-[15px] relative">
+                <a  >
                 <figure className="bids-img transition-all duration-[0.3s] ease-in-out relative m-0 truncate">
-                  <a
-                    href="#"
-                    className="transition-all duration-[0.3s] ease-in-out w-[35px] min-h-[35px] p-[5px] bg-[#24232ee6] flex justify-center items-center flex-col absolute right-[10px] top-[10px] hover:bg-[#24232e]"
-                  >
-                    <i className="ri-heart-line text-[#fff] text-[20px] leading-[20px]" />
-                    <p className="m-0 text-[11px] leading-[13px]">0</p>
-                  </a>
+          
                   <img
-                    src="img/2.jpg"
-                    alt="bids-2-img"
+                    src="img/elon.png"
+                    alt="moon"
                     className="transition-all duration-[0.3s] ease-in-out w-full"
                   />
                 </figure>
@@ -373,15 +483,10 @@ function Home() {
                       href="product-details.html"
                       className="font-Manrope text-[17px] max-[1399px]:text-[16px] leading-[18px] font-medium"
                     >
-                      Les the Treachery
+                     Elon
                     </a>
                   </h4>
                   <div className="user-details flex pb-[20px]">
-                    <img
-                      src="img/ep-2.jpg"
-                      alt="ep"
-                      className="w-[35px] h-[35px] rounded-[100%]"
-                    />
                     <div className="details-contact flex justify-between w-full">
                       <div className="sub-contact pl-[10px]">
                         <h5 className="mb-[5px] text-[20px] leading-[14px]">
@@ -389,42 +494,26 @@ function Home() {
                             href="authors.html"
                             className="mb-[5px] font-Manrope text-[14px] leading-[14px] font-light tracking-[0.05rem]"
                           >
-                            Freddie Carpenter
+                          David tanham
                           </a>
                         </h5>
-                        <p className="text-[13px] leading-[18px] text-[#bbb]">
-                          @nickname
-                        </p>
+ 
                       </div>
                     </div>
                   </div>
-                  <div className="bids-price flex justify-between items-end">
-                    <div className="current-bids">
-                      <h5 className="mb-[5px] font-Manrope text-[12px] leading-[18px] text-[#bbb] font-light">
-                        Current Bid
-                      </h5>
-                    </div>
-                    <a
-                      href="#"
-                      className="infy-buttons-invers transition-all duration-[0.3s] ease-in-out h-[40px] py-[15px] px-[20px] leading-[2px] border-[1px] border-solid border-[#24232ee6] text-[12px] font-light text-[#fff] relative z-[2] tracking-[1px] flex items-center modal-toggle"
-                    >
-                      Place Bid
-                    </a>
-                  </div>
+  
                 </div>
+                </a>
               </div>
+
+
               <div className="bids-card transition-all duration-[0.3s] ease-in-out bg-[#24232e80] p-[15px] relative">
+                <a  >
                 <figure className="bids-img transition-all duration-[0.3s] ease-in-out relative m-0 truncate">
-                  <a
-                    href="#"
-                    className="transition-all duration-[0.3s] ease-in-out w-[35px] min-h-[35px] p-[5px] bg-[#24232ee6] flex justify-center items-center flex-col absolute right-[10px] top-[10px] hover:bg-[#24232e]"
-                  >
-                    <i className="ri-heart-line text-[#fff] text-[20px] leading-[20px]" />
-                    <p className="m-0 text-[11px] leading-[13px]">05</p>
-                  </a>
+          
                   <img
-                    src="img/3.jpg"
-                    alt="bids-3-img"
+                    src="img/elonmask.png"
+                    alt="moon"
                     className="transition-all duration-[0.3s] ease-in-out w-full"
                   />
                 </figure>
@@ -434,15 +523,10 @@ function Home() {
                       href="product-details.html"
                       className="font-Manrope text-[17px] max-[1399px]:text-[16px] leading-[18px] font-medium"
                     >
-                      Walking on Air
+                     Space
                     </a>
                   </h4>
                   <div className="user-details flex pb-[20px]">
-                    <img
-                      src="img/ep-3.jpg"
-                      alt="ep"
-                      className="w-[35px] h-[35px] rounded-[100%]"
-                    />
                     <div className="details-contact flex justify-between w-full">
                       <div className="sub-contact pl-[10px]">
                         <h5 className="mb-[5px] text-[20px] leading-[14px]">
@@ -450,42 +534,26 @@ function Home() {
                             href="authors.html"
                             className="mb-[5px] font-Manrope text-[14px] leading-[14px] font-light tracking-[0.05rem]"
                           >
-                            Trista Franceis
+                          Mehrdad2000
                           </a>
                         </h5>
-                        <p className="text-[13px] leading-[18px] text-[#bbb]">
-                          @redalert
-                        </p>
+ 
                       </div>
                     </div>
                   </div>
-                  <div className="bids-price flex justify-between items-end">
-                    <div className="current-bids">
-                      <h5 className="mb-[5px] font-Manrope text-[12px] leading-[18px] text-[#bbb] font-light">
-                        Current Bid
-                      </h5>
-                    </div>
-                    <a
-                      href="#"
-                      className="infy-buttons-invers transition-all duration-[0.3s] ease-in-out h-[40px] py-[15px] px-[20px] leading-[2px] border-[1px] border-solid border-[#24232ee6] text-[12px] font-light text-[#fff] relative z-[2] tracking-[1px] flex items-center modal-toggle"
-                    >
-                      Place Bid
-                    </a>
-                  </div>
+  
                 </div>
+                </a>
               </div>
+
+   
               <div className="bids-card transition-all duration-[0.3s] ease-in-out bg-[#24232e80] p-[15px] relative">
+                <a  >
                 <figure className="bids-img transition-all duration-[0.3s] ease-in-out relative m-0 truncate">
-                  <a
-                    href="#"
-                    className="transition-all duration-[0.3s] ease-in-out w-[35px] min-h-[35px] p-[5px] bg-[#24232ee6] flex justify-center items-center flex-col absolute right-[10px] top-[10px] hover:bg-[#24232e]"
-                  >
-                    <i className="ri-heart-line text-[#fff] text-[20px] leading-[20px]" />
-                    <p className="m-0 text-[11px] leading-[13px]">11</p>
-                  </a>
+          
                   <img
-                    src="img/4.jpg"
-                    alt="bids-4-img"
+                    src="img/future.jpg"
+                    alt="future"
                     className="transition-all duration-[0.3s] ease-in-out w-full"
                   />
                 </figure>
@@ -495,15 +563,10 @@ function Home() {
                       href="product-details.html"
                       className="font-Manrope text-[17px] max-[1399px]:text-[16px] leading-[18px] font-medium"
                     >
-                      Tranquility
+                     The Future
                     </a>
                   </h4>
                   <div className="user-details flex pb-[20px]">
-                    <img
-                      src="img/ep-4.jpg"
-                      alt="ep"
-                      className="w-[35px] h-[35px] rounded-[100%]"
-                    />
                     <div className="details-contact flex justify-between w-full">
                       <div className="sub-contact pl-[10px]">
                         <h5 className="mb-[5px] text-[20px] leading-[14px]">
@@ -511,103 +574,53 @@ function Home() {
                             href="authors.html"
                             className="mb-[5px] font-Manrope text-[14px] leading-[14px] font-light tracking-[0.05rem]"
                           >
-                            Freddie Carpenter
+                          karen Arkiyani
                           </a>
                         </h5>
-                        <p className="text-[13px] leading-[18px] text-[#bbb]">
-                          @neo
-                        </p>
+ 
                       </div>
                     </div>
                   </div>
-                  <div className="bids-price flex justify-between items-end">
-                    <div className="current-bids">
-                      <h5 className="mb-[5px] font-Manrope text-[12px] leading-[18px] text-[#bbb] font-light">
-                        Current Bid
-                      </h5>
-                    </div>
-                    <a
-                      href="#"
-                      className="infy-buttons-invers transition-all duration-[0.3s] ease-in-out h-[40px] py-[15px] px-[20px] leading-[2px] border-[1px] border-solid border-[#24232ee6] text-[12px] font-light text-[#fff] relative z-[2] tracking-[1px] flex items-center modal-toggle"
-                    >
-                      Place Bid
-                    </a>
-                  </div>
+  
                 </div>
-              </div>
-              <div className="bids-card transition-all duration-[0.3s] ease-in-out bg-[#24232e80] p-[15px] relative">
-                <figure className="bids-img transition-all duration-[0.3s] ease-in-out relative m-0 truncate">
-                  <a
-                    href="#"
-                    className="transition-all duration-[0.3s] ease-in-out w-[35px] min-h-[35px] p-[5px] bg-[#24232ee6] flex justify-center items-center flex-col absolute right-[10px] top-[10px] hover:bg-[#24232e]"
-                  >
-                    <i className="ri-heart-line text-[#fff] text-[20px] leading-[20px]" />
-                    <p className="m-0 text-[11px] leading-[13px]">0</p>
-                  </a>
-                  <img
-                    src="img/5.jpg"
-                    alt="bids-5-img"
-                    className="transition-all duration-[0.3s] ease-in-out w-full"
-                  />
-                </figure>
-                <div className="infy-bids pt-[18px]">
-                  <h4 className="pb-[20px] leading-[20px]">
-                    <a
-                      href="product-details.html"
-                      className="font-Manrope text-[17px] max-[1399px]:text-[16px] leading-[18px] font-medium"
-                    >
-                      Industrial Revolution
-                    </a>
-                  </h4>
-                  <div className="user-details flex pb-[20px]">
-                    <img
-                      src="img/ep-5.jpg"
-                      alt="ep"
-                      className="w-[35px] h-[35px] rounded-[100%]"
-                    />
-                    <div className="details-contact flex justify-between w-full">
-                      <div className="sub-contact pl-[10px]">
-                        <h5 className="mb-[5px] text-[20px] leading-[14px]">
-                          <a
-                            href="authors.html"
-                            className="mb-[5px] font-Manrope text-[14px] leading-[14px] font-light tracking-[0.05rem]"
-                          >
-                            Tyler Covington
-                          </a>
-                        </h5>
-                        <p className="text-[13px] leading-[18px] text-[#bbb]">
-                          @midinh
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bids-price flex justify-between items-end">
-                    <div className="current-bids">
-                      <h5 className="mb-[5px] font-Manrope text-[12px] leading-[18px] text-[#bbb] font-light">
-                        Current Bid
-                      </h5>
-                    </div>
-                    <a
-                      href="#"
-                      className="infy-buttons-invers transition-all duration-[0.3s] ease-in-out h-[40px] py-[15px] px-[20px] leading-[2px] border-[1px] border-solid border-[#24232ee6] text-[12px] font-light text-[#fff] relative z-[2] tracking-[1px] flex items-center modal-toggle"
-                    >
-                      Place Bid
-                    </a>
-                  </div>
-                </div>
-              </div>
+                </a>
+              </div>           
+
             </div>
           </div>
         </div>
       </div>
     </section>
     <section className="process-sec bg-[#24232e33] py-[100px] max-[1199px]:py-[70px]">
+
+    <div className="sc-card-activity style1 mx-auto justify-between  min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
+      <div className="contents">
+        <div className="media">
+          <img
+            src="img/biconomycom_logo.jpg"
+            alt=""
+          />
+        </div>
+        <div className="infor">
+          <h3>
+            {" "}
+            <a href="/item-details-01">NFTAi Token Listed in Biconomy Exchange</a>
+          </h3>
+          <div className="status">
+           Click to see the details <a href="https://www.biconomy.com/exchange/NFTAI_USDT" className="author">NFTAi Spot</a>
+          </div>
+          <div className="time"> </div>
+        </div>
+      </div>
+      <div className="button-active icon icon-5" > Current Price : <br /><span>0.0019210 $</span> </div>
+    </div>
+      
       <div className="flex flex-wrap justify-between items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
         <div
           className="w-full flex flex-wrap mb-[-24px]"
           data-aos="fade-up"
-          data-aos-duration={2000}
-        >
+          data-aos-duration={2000}        >
+
           <div className="w-full px-[12px]">
             <div className="infy-banner w-full mb-[30px] text-center block">
               <h4 className="text-[30px] max-[1199px]:text-[29px] max-[991px]:text-[27px] max-[767px]:text-[26px] max-[575px]:text-[22px] max-[420px]:text-[20px] font-semibold leading-[1.2]">
@@ -724,14 +737,9 @@ function Home() {
               NFTAI is the first Prompt Artist Platform, which lets you mint your imagination into an AI-Generated NFT. Collectors and enthusiasts can buy/sell the NFT together with the prompt that was used to generate the image.
               </p>
               <div className="mx-[-5px] flex">
+ 
                 <a
-                  href="#"
-                  className="transition-all duration-[0.3s] ease-in-out w-[40px] h-[40px] mx-[5px] flex items-center justify-center bg-[#73739c26] hover:bg-[#73739c4d] text-[#fff]"
-                >
-                  <i className="ri-facebook-fill flex justify-center items-center text-[18px]" />
-                </a>
-                <a
-                  href="#"
+                  href="https://x.com/NFTAi_Ai"
                   className="transition-all duration-[0.3s] ease-in-out w-[40px] h-[40px] mx-[5px] flex items-center justify-center bg-[#73739c26] hover:bg-[#73739c4d] text-[#fff]"
                 >
                   <i className="ri-twitter-fill flex justify-center items-center text-[18px]" />
@@ -743,11 +751,17 @@ function Home() {
                   <i className="ri-linkedin-fill flex justify-center items-center text-[18px]" />
                 </a>
                 <a
-                  href="#"
+                  href="https://t.me/NftAi_Ai"
                   className="transition-all duration-[0.3s] ease-in-out w-[40px] h-[40px] mx-[5px] flex items-center justify-center bg-[#73739c26] hover:bg-[#73739c4d] text-[#fff]"
                 >
-                  <i className="ri-pinterest-fill flex justify-center items-center text-[18px]" />
-                </a>
+                  <i className="ri-telegram-fill flex justify-center items-center text-[18px]" />
+                </a> 
+                <a
+                  href="https://t.me/NFTAi_chat"
+                  className="transition-all duration-[0.3s] ease-in-out w-[40px] h-[40px] mx-[5px] flex items-center justify-center bg-[#73739c26] hover:bg-[#73739c4d] text-[#fff]"
+                >
+                  <i className="ri-telegram-fill flex justify-center items-center text-[18px]" />
+                </a>                        
               </div>
             </div>
           </div>
@@ -774,6 +788,14 @@ function Home() {
                   </a>
                 </li>
                 <li>
+                      <a
+                        href="about"
+                        className="transition-all duration-[0.3s] ease-in-out py-[5px] flex text-[14px] leading-[28px] text-[#dbdbdb] hover:text-[#a487f2]"
+                      >
+                        About
+                      </a>
+                    </li>             
+                <li>
                   <a
                     href="privacy"
                     className="transition-all duration-[0.3s] ease-in-out py-[5px] flex text-[14px] leading-[28px] text-[#dbdbdb] hover:text-[#a487f2]"
@@ -790,14 +812,7 @@ function Home() {
                 Community
               </h4>
               <ul>
-                <li>
-                  <a
-                    href="forum"
-                    className="transition-all duration-[0.3s] ease-in-out py-[5px] flex text-[14px] leading-[28px] text-[#dbdbdb] hover:text-[#a487f2]"
-                  >
-                    Forum Community
-                  </a>
-                </li>
+ 
                 <li>
                   <a
                     href="faq"
@@ -831,21 +846,7 @@ function Home() {
                   </p>
                 </div>
                 <div className="privacy-contact-copy max-[767px]:flex max-[767px]:justify-center">
-                  <ul className="flex flex-wrap justify-center">
-                    <li className="relative">
-                      <a href="policy" className="text-[14px] text-[#fff]">
-                        Policy
-                      </a>
-                    </li>
-                    <li className="relative">
-                      <a
-                        href="terms"
-                        className="text-[14px] text-[#fff]"
-                      >
-                        Terms
-                      </a>
-                    </li>
-                  </ul>
+ 
                 </div>
               </div>
             </div>

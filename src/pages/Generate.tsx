@@ -38,7 +38,36 @@ function Generate(){
     const { isConnected} = useAppKitAccount();
     //const { connection } = useAppKitConnection();
     const { walletProvider } = useAppKitProvider<Provider>('solana');
+    if (isConnected) {
+      const formData= { recipient: walletProvider.publicKey}
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+    };   
+     fetch('https://nftai.live/api/op.php?method=getInfo',requestOptions)
+    .then((res)=>{
+        if(res.ok) {
+          return res.json();
+          
+        }
+    }).then((res)=>{
+        //console.log(res.token_price);  
+   
+        (document.getElementById('nft_amount0') as HTMLInputElement).innerText=res.amount+' Credit';
+        (document.getElementById('nft_amount1') as HTMLInputElement).innerText=res.amount+' Credit';
+        var json=res.nfts;
+        var addbox='';
+        json.forEach((item:any) => {
+          //addbox=addbox+'<div class="w-[33.33%] max-[420px]:w-full px-[12px] infy-width-full "><div class="infy-select-method relative transition-all duration-[0.3s] ease-in-out mb-[25px] py-[30px] px-[10px] bg-[#24232e80] flex flex-col items-center justify-center cursor-pointer hover:bg-[#24232e4d]"><div role="status" class="max-w-sm animate-pulse"><div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4" /><span class="sr-only"><img  src="'+item.nft_url+'" /></span></div></div></div>';
+          addbox=addbox+'<div class="min-[768px]:w-[50%] min-[992px]:w-[25%] px-[12px] w-full mb-[24px]" /><img  src="'+item.nft_url+'" /></span></div>';
+          
+         });
 
+        $('#generatedimages').html(addbox);
+
+    })
+    }
  
  const GenNft = async () => {
     if (!isConnected || !walletProvider || !walletProvider.publicKey) {
@@ -50,7 +79,10 @@ var addbox='';
 const nftcount= (document.getElementById('nftcount') as HTMLInputElement).value;
 const model= (document.getElementById('nftmodel') as HTMLInputElement).value;
 const txtprompt= (document.getElementById('txtprompt') as HTMLInputElement).value;
-
+if (txtprompt==''){
+  alert('Prompt text is required field');
+  return false;
+}
  var htmlbox='<div className="w-[33.33%] max-[420px]:w-full px-[12px] infy-width-full "><div className="infy-select-method relative transition-all duration-[0.3s] ease-in-out mb-[25px] py-[30px] px-[10px] bg-[#24232e80] flex flex-col items-center justify-center cursor-pointer hover:bg-[#24232e4d]"><div role="status" className="max-w-sm animate-pulse"><div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4" /><span className="sr-only">Loading...</span></div></div></div>';
 for(let j=1;j<= parseInt(nftcount);j++){
     addbox=addbox+htmlbox;
@@ -62,7 +94,19 @@ const requestOptions = {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData)
 }; 
- await fetch('https://nftai.online/api/op.php?method=create', requestOptions);
+ //await fetch('https://nftai.online/api/op.php?method=create', requestOptions);
+ 
+ const response = await fetch('https://nftai.online/api/op.php?method=create', requestOptions);
+ const data = await response.json();
+ //console.log(data.success);
+ if(typeof data.success !== 'undefined' && data.success == true){
+  alert(data.msg);
+  window.location.reload();
+
+ }else
+ alert(data.msg);
+
+
 
  
   };
@@ -111,7 +155,7 @@ const requestOptions = {
                         <li className="nav-item dropdown ml-[30px] text-[15px] font-Manrope text-[#fff] font-light leading-[26px] tracking-[0.03rem]">
                           <a
                             className="nav-link dropdown-toggle relative py-[5px] text-[14px] max-[1199px]:text-[13px] font-Manrope text-[#fff] flex"
-                            href="#"
+                            href="explore"
                             role="button"
                             data-bs-toggle="dropdown"
                           >
@@ -131,28 +175,37 @@ const requestOptions = {
                         <li className="nav-item dropdown ml-[30px] text-[15px] font-Manrope text-[#fff] font-light leading-[26px] tracking-[0.03rem]">
                           <a
                             className="nav-link dropdown-toggle relative py-[5px] text-[14px] max-[1199px]:text-[13px] font-Manrope text-[#fff] flex"
-                            href="whitepaper.pdf"
+                            href="https://nftai.gitbook.io/nftai"
                             role="button"
                             data-bs-toggle="dropdown"
                           >
                             Whitepaper
                           </a>
                         </li>
-       
+                        {!isConnected ? '' :                             
+                        <li className="nav-item dropdown ml-[30px] text-[15px] font-Manrope text-[#fff] font-light leading-[26px] tracking-[0.03rem]">
+                          <a
+                            className="nav-link dropdown-toggle relative py-[5px] text-[14px] max-[1199px]:text-[13px] font-Manrope text-[#fff] flex"
+                            href="generate"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                          >
+                            Create
+                          </a>
+                        </li> 
+
+                          } 
+
                       </ul>
                     </div>
-                    <div className="infy-header-search px-[24px] max-[991px]:hidden">
-                      <form
-                        className="infy-search-group-form flex items-center relative"
-                        action="#"
-                      >
-                        <i className="ri-search-line absolute left-[15px] text-[13px] text-[#ddd] cursor-pointer transition-all duration-[0.5s] ease-in-out" />
-                        <input
-                          className="form-control infy-search-bar w-full min-w-[300px] max-[1399px]:min-w-[300px] max-[1199px]:min-w-[200px] min-h-[40px] h-[40px] pl-[40px] block font-Manrope text-[13px] border-0 outline-0 font-normal leading-[1] text-[#ddd] tracking-[0.6px]"
-                          placeholder="Search Here..."
-                          type="text"
-                        />
-                      </form>
+                    <div className="infy-header-search px-[24px] max-[991px]:hidden nft_amount">
+                    {!isConnected ? '' :  <a  href="profile"
+                    className="infy-buttons mx-w-auto transition-all duration-[0.3s] ease-in-out h-[40px] px-[20px] leading-[26px] text-[#fff] relative z-[2] text-[14px] font-medium border-[1px] border-solid border-transparent tracking-[1px] flex items-center hover:text-[#fff] result-placeholder"
+                   id="nft_amount0">
+                       Credit 0
+                   </a >
+                   
+                   }
                     </div>
                     <div className="infy-header-buttons max-[991px]:hidden">
                     <appkit-button />
@@ -180,6 +233,13 @@ const requestOptions = {
             </button>
           </div>
           <div className="infy-menu-inner flex flex-col justify-between">
+          {!isConnected ? '' :  <a  href="profile"
+                    className="nft_amount infy-buttons mx-w-auto transition-all duration-[0.3s] ease-in-out h-[40px] px-[20px] leading-[26px] text-[#fff] relative z-[2] text-[14px] font-medium border-[1px] border-solid border-transparent tracking-[1px] flex items-center hover:text-[#fff] result-placeholder"
+                    id="nft_amount1">
+                       Credit 0
+                   </a >
+                   
+                   }
           <appkit-button />
             <div className="infy-menu-content">
               <ul>
@@ -191,6 +251,20 @@ const requestOptions = {
                     Home
                   </a>
                 </li>
+                {!isConnected ? '' :                             
+                        <li className="nav-item dropdown ml-[30px] text-[15px] font-Manrope text-[#fff] font-light leading-[26px] tracking-[0.03rem]">
+                          <a
+                            className="nav-item dropdown ml-[30px] text-[15px] font-Manrope text-[#fff] font-light leading-[26px] tracking-[0.03rem]"
+                            href="generate"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                          >
+                            Create
+                          </a>
+                        </li> 
+                          
+                          }
+
                 <li className="dropdown drop-list relative leading-[28px]">
                   <a
                     href="explore"
@@ -367,30 +441,30 @@ const requestOptions = {
                   NFTAI is the first Prompt Artist Platform, which lets you mint your imagination into an AI-Generated NFT. Collectors and enthusiasts can buy/sell the NFT together with the prompt that was used to generate the image.
                   </p>
                   <div className="mx-[-5px] flex">
-                    <a
-                      href="#"
-                      className="transition-all duration-[0.3s] ease-in-out w-[40px] h-[40px] mx-[5px] flex items-center justify-center bg-[#73739c26] hover:bg-[#73739c4d] text-[#fff]"
-                    >
-                      <i className="ri-facebook-fill flex justify-center items-center text-[18px]" />
-                    </a>
-                    <a
-                      href="#"
-                      className="transition-all duration-[0.3s] ease-in-out w-[40px] h-[40px] mx-[5px] flex items-center justify-center bg-[#73739c26] hover:bg-[#73739c4d] text-[#fff]"
-                    >
-                      <i className="ri-twitter-fill flex justify-center items-center text-[18px]" />
-                    </a>
-                    <a
-                      href="#"
-                      className="transition-all duration-[0.3s] ease-in-out w-[40px] h-[40px] mx-[5px] flex items-center justify-center bg-[#73739c26] hover:bg-[#73739c4d] text-[#fff]"
-                    >
-                      <i className="ri-linkedin-fill flex justify-center items-center text-[18px]" />
-                    </a>
-                    <a
-                      href="#"
-                      className="transition-all duration-[0.3s] ease-in-out w-[40px] h-[40px] mx-[5px] flex items-center justify-center bg-[#73739c26] hover:bg-[#73739c4d] text-[#fff]"
-                    >
-                      <i className="ri-pinterest-fill flex justify-center items-center text-[18px]" />
-                    </a>
+                  <a
+                  href="https://x.com/NFTAi_Ai"
+                  className="transition-all duration-[0.3s] ease-in-out w-[40px] h-[40px] mx-[5px] flex items-center justify-center bg-[#73739c26] hover:bg-[#73739c4d] text-[#fff]"
+                >
+                  <i className="ri-twitter-fill flex justify-center items-center text-[18px]" />
+                </a>
+                <a
+                  href="#"
+                  className="transition-all duration-[0.3s] ease-in-out w-[40px] h-[40px] mx-[5px] flex items-center justify-center bg-[#73739c26] hover:bg-[#73739c4d] text-[#fff]"
+                >
+                  <i className="ri-linkedin-fill flex justify-center items-center text-[18px]" />
+                </a>
+                <a
+                  href="https://t.me/NftAi_Ai"
+                  className="transition-all duration-[0.3s] ease-in-out w-[40px] h-[40px] mx-[5px] flex items-center justify-center bg-[#73739c26] hover:bg-[#73739c4d] text-[#fff]"
+                >
+                  <i className="ri-telegram-fill flex justify-center items-center text-[18px]" />
+                </a> 
+                <a
+                  href="https://t.me/NFTAi_chat"
+                  className="transition-all duration-[0.3s] ease-in-out w-[40px] h-[40px] mx-[5px] flex items-center justify-center bg-[#73739c26] hover:bg-[#73739c4d] text-[#fff]"
+                >
+                  <i className="ri-telegram-fill flex justify-center items-center text-[18px]" />
+                </a>
                   </div>
                 </div>
               </div>
@@ -418,6 +492,14 @@ const requestOptions = {
                     </li>
                     <li>
                       <a
+                        href="about"
+                        className="transition-all duration-[0.3s] ease-in-out py-[5px] flex text-[14px] leading-[28px] text-[#dbdbdb] hover:text-[#a487f2]"
+                      >
+                        About
+                      </a>
+                    </li>              
+                    <li>
+                      <a
                         href="privacy"
                         className="transition-all duration-[0.3s] ease-in-out py-[5px] flex text-[14px] leading-[28px] text-[#dbdbdb] hover:text-[#a487f2]"
                       >
@@ -435,14 +517,7 @@ const requestOptions = {
                     Community
                   </h4>
                   <ul>
-                    <li>
-                      <a
-                        href="forum"
-                        className="transition-all duration-[0.3s] ease-in-out py-[5px] flex text-[14px] leading-[28px] text-[#dbdbdb] hover:text-[#a487f2]"
-                      >
-                        Forum Community
-                      </a>
-                    </li>
+    
                     <li>
                       <a
                         href="faq"
@@ -476,26 +551,7 @@ const requestOptions = {
                       </p>
                     </div>
                     <div className="privacy-contact-copy max-[767px]:flex max-[767px]:justify-center">
-                      <ul className="flex flex-wrap justify-center">
-                        <li className="relative">
-                          <a href="privacy" className="text-[14px] text-[#fff]">
-                            Policy
-                          </a>
-                        </li>
-                        <li className="relative">
-                          <a
-                            href="terms"
-                            className="text-[14px] text-[#fff]"
-                          >
-                            Terms
-                          </a>
-                        </li>
-                        <li className="relative">
-                          <a href="contact" className="text-[14px] text-[#fff]">
-                            Contact
-                          </a>
-                        </li>
-                      </ul>
+             
                     </div>
                   </div>
                 </div>

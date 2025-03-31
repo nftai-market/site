@@ -34,7 +34,7 @@ const solanaWeb3JsAdapter = new SolanaAdapter({
     },
   });
 
-function Explore(){
+function About(){
     const { isConnected} = useAppKitAccount();
     //const { connection } = useAppKitConnection();
  
@@ -87,13 +87,13 @@ function Explore(){
                             role="button"
                             data-bs-toggle="dropdown"
                           >
-                            Explore
+                            About
                           </a>
                         </li>
                         <li className="nav-item dropdown ml-[30px] text-[15px] font-Manrope text-[#fff] font-light leading-[26px] tracking-[0.03rem]">
                           <a
                             className="nav-link dropdown-toggle relative py-[5px] text-[14px] max-[1199px]:text-[13px] font-Manrope text-[#fff] flex"
-                            href="airdrop"
+                            href="airdrop?"
                             role="button"
                             data-bs-toggle="dropdown"
                           >
@@ -179,7 +179,7 @@ function Explore(){
                 </li>
                 <li className="dropdown drop-list relative leading-[28px]">
                   <a
-                    href="airdrop"
+                    href="airdrop?"
                     className="dropdown-list p-[10px] block capitalize text-[15px] font-normal border-b-[1px] border-solid border-[#24232e99]"
                   >
                     Airdrop
@@ -208,13 +208,13 @@ function Explore(){
       <div className="w-full px-[12px]">
         <div className="h-[250px] max-[575px]:h-[200px] flex justify-center flex-col items-center text-center" style={{ height: 180 }}>
           <h2 className="text-[32px] font-semibold tracking-[1px] leading-[26px] mb-[15px] max-[1199px]:text-[30px] max-[991px]:text-[28px] max-[767px]:text-[26px] max-[575px]:text-[22px] max-[575px]:mb-[5px]">
-           Explore
+           About
           </h2>
           <div className="infy-breadcrumb">
             <h5 className="flex items-center leading-[1.2]">
               <span className="leading-[1.2] text-[20px]">
                 <a
-                  href="index"
+                  href="/"
                   className="transition-all duration-[0.3s] ease-in-out text-[14px] text-[#bbb] hover:text-[#fff]"
                 >
                   Home
@@ -225,10 +225,10 @@ function Explore(){
               </span>
               <span className="leading-[1.2] text-[20px]">
                 <a
-                  href="#"
+                  href="faq"
                   className="transition-all duration-[0.3s] ease-in-out text-[14px] text-[#bbb]"
                 >
-                  Create a New File
+                  About
                 </a>
               </span>
             </h5>
@@ -238,28 +238,209 @@ function Explore(){
     </div>
   </div>
 </section>    
-        <section className="explore-products-sec pt-[50px] max-[1199px]:pt-[35px] pb-[100px] max-[1199px]:pb-[70px]">
+<section className="section-privacy pt-[50px] max-[1199px]:pt-[35px] pb-[100px] max-[1199px]:pb-[70px]">
   <div className="relative flex flex-wrap justify-between items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
-    <div className="w-full flex flex-wrap">
-      <div className="w-full">
-        <div
-          className="infy-explore-products-tabs infy-explore-page"
-          data-aos="fade-up"
-          data-aos-duration={2000}
-        >
+    <div
+      className="w-full flex flex-wrap aos-init aos-animate"
+      data-aos="fade-up"
+      data-aos-duration={2000}
+    >
+      <div className="w-full px-[12px]">
+        <div className="infy-privacy p-[30px] bg-[#24232e80]">
+        <div className="w-full flex flex-wrap mb-[-24px]">
+  <div
+    className="min-[1200px]:w-[50%] min-[992px]:w-[58.33%] w-full px-[12px] mb-[24px] aos-init aos-animate"
+    data-aos="fade-up"
+    data-aos-duration={1500}
+  >
+    <div className="h-full flex flex-col justify-center">
+      <h4 className="mb-[25px] font-Manrope text-[24px] leading-[1.2] font-semibold max-[575px]:text-[20px]">
+        Who We Are
+      </h4>
+      <p className="mb-[15px] text-[#fff] leading-[28px] text-[16px] font-medium">
+      NFTAi is a groundbreaking platform that merges artificial intelligence and blockchain technology to redefine the world of digital collectibles. By leveraging cutting-edge AI algorithms, NFTAi enables users to generate unique, high-quality NFTs effortlessly. Whether you're an artist, collector, or investor, our ecosystem provides a seamless and decentralized experience like never before.
 
-          <div className="tab-content" id="myTabContent">
-            <div className="tab-pane" id="trending">
-              <div className="w-full flex flex-wrap">
-    
+      <br />Key Features:
+      </p>
+      <p className="text-[14px] font-light text-[#dbdbdb] leading-[28px]">
+      <ul className="mt-[15px] mb-[16px] pl-[32px] list-disc">
+  <li className="text-[#c9c9c9] leading-[28px]">
+  AI-Generated NFTs - Create stunning, one-of-a-kind artworks powered by AI.
+  </li>
+  <li className="text-[#c9c9c9] leading-[28px]">
+  Decentralized NFT Marketplace - Trade, buy, and sell AI-powered NFTs securely.
+  </li>
+  <li className="text-[#c9c9c9] leading-[28px]">
+  Multi-Chain Compatibility - Enjoy cross-chain support for better accessibility.
+  </li>
+  <li className="text-[#c9c9c9] leading-[28px]">
+  Exclusive Partnerships - Collaborating with top artists, brands, and institutions.
+  </li>
+  <li className="text-[#c9c9c9] leading-[28px]">
+  Token Utility & Staking - Hold and stake $NFTAi for exclusive rewards.
+  </li>
+  
+</ul>
+      </p>
+
+
       
+    </div>
+  </div>
+  <div
+    className="min-[1200px]:w-[50%] min-[992px]:w-[41.66%] w-full px-[12px] mb-[24px] aos-init aos-animate"
+    data-aos="fade-up"
+    data-aos-duration={2000}
+  >
+    <img
+      src="img/user1.jpg"
+      alt="user pic"
+      className="w-full sticky top-[65px]"
+    />
+  </div>
+</div>
 
-              </div>
-            </div>
  
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section className="section-team  max-[1199px]:pt-[70px] pb-[50px] max-[1199px]:pb-[35px]">
+  <div className="flex flex-wrap justify-between items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
+    <div className="w-full flex flex-wrap mb-[-24px]">
+      <div
+        className="w-full px-[12px] aos-init aos-animate"
+        data-aos="fade-up"
+        data-aos-duration={1500}
+      >
+        <div className="infy-banner w-full mb-[30px] text-center block">
+          <h4 className="text-[30px] max-[1199px]:text-[29px] max-[991px]:text-[27px] max-[767px]:text-[26px] max-[575px]:text-[22px] max-[420px]:text-[20px] font-semibold leading-[1.2]">
+            Meet Our Team
+          </h4>
+          <div className="mt-[5px] flex justify-center">
+            <p className="font-Manrope text-[14px] font-light text-[#dbdbdb]">
+              The value of achievement lies in the achieving.
+            </p>
           </div>
         </div>
       </div>
+      <div
+        className="min-[992px]:w-[25%] min-[421px]:w-[50%] w-full px-[12px] mb-[24px] aos-init aos-animate"
+        data-aos="fade-up"
+        data-aos-duration={1700}
+      >
+        <div className="infy-team transition-all duration-[0.3s] ease-in-out p-[15px] bg-[#24232e80]">
+          <img src="img/user3.jpg" alt="team" className="w-full" />
+          <div className="mt-[15px] text-center">
+            <h5 className="mb-[5px] font-Manrope text-[16px] leading-[1.2] font-normal">
+            Luka Kartli
+            </h5>
+            <p className="mb-[15px] text-[12px] leading-[16px] text-[#dbdbdb]">
+            Co-Founder
+            </p>
+            <div className="flex justify-center">
+              <a
+                href="javascript:void(0)"
+                className="transition-all duration-[0.3s] ease-in-out w-[32px] h-[32px] mx-[1px] flex bg-[#73739c26] text-[#fff] hover:bg-[#73739c4d]"
+              >
+                <i className="ri-facebook-fill w-[32px] h-[32px] flex justify-center items-center text-[14px]" />
+              </a>
+              <a
+                href="javascript:void(0)"
+                className="transition-all duration-[0.3s] ease-in-out w-[32px] h-[32px] mx-[1px] flex bg-[#73739c26] text-[#fff] hover:bg-[#73739c4d]"
+              >
+                <i className="ri-twitter-fill w-[32px] h-[32px] flex justify-center items-center text-[14px]" />
+              </a>
+              <a
+                href="javascript:void(0)"
+                className="transition-all duration-[0.3s] ease-in-out w-[32px] h-[32px] mx-[1px] flex bg-[#73739c26] text-[#fff] hover:bg-[#73739c4d]"
+              >
+                <i className="ri-linkedin-fill w-[32px] h-[32px] flex justify-center items-center text-[14px]" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+ 
+      <div
+        className="min-[992px]:w-[25%] min-[421px]:w-[50%] w-full px-[12px] mb-[24px] aos-init aos-animate"
+        data-aos="fade-up"
+        data-aos-duration={2300}
+      >
+        <div className="infy-team transition-all duration-[0.3s] ease-in-out p-[15px] bg-[#24232e80]">
+          <img src="img/user2.jpg" alt="team" className="w-full" />
+          <div className="mt-[15px] text-center">
+            <h5 className="mb-[5px] font-Manrope text-[16px] leading-[1.2] font-normal">
+            Mark Willem
+            </h5>
+            <p className="mb-[15px] text-[12px] leading-[16px] text-[#dbdbdb]">
+            Co-Founder
+            </p>
+            <div className="flex justify-center">
+              <a
+                href="javascript:void(0)"
+                className="transition-all duration-[0.3s] ease-in-out w-[32px] h-[32px] mx-[1px] flex bg-[#73739c26] text-[#fff] hover:bg-[#73739c4d]"
+              >
+                <i className="ri-facebook-fill w-[32px] h-[32px] flex justify-center items-center text-[14px]" />
+              </a>
+              <a
+                href="javascript:void(0)"
+                className="transition-all duration-[0.3s] ease-in-out w-[32px] h-[32px] mx-[1px] flex bg-[#73739c26] text-[#fff] hover:bg-[#73739c4d]"
+              >
+                <i className="ri-twitter-fill w-[32px] h-[32px] flex justify-center items-center text-[14px]" />
+              </a>
+              <a
+                href="javascript:void(0)"
+                className="transition-all duration-[0.3s] ease-in-out w-[32px] h-[32px] mx-[1px] flex bg-[#73739c26] text-[#fff] hover:bg-[#73739c4d]"
+              >
+                <i className="ri-linkedin-fill w-[32px] h-[32px] flex justify-center items-center text-[14px]" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div
+        className="min-[992px]:w-[25%] min-[421px]:w-[50%] w-full px-[12px] mb-[24px] aos-init aos-animate"
+        data-aos="fade-up"
+        data-aos-duration={2300}
+      >
+        <div className="infy-team transition-all duration-[0.3s] ease-in-out p-[15px] bg-[#24232e80]">
+          <img src="img/user1.jpg" alt="team" className="w-full" />
+          <div className="mt-[15px] text-center">
+            <h5 className="mb-[5px] font-Manrope text-[16px] leading-[1.2] font-normal">
+            Sajad Jalilian
+            </h5>
+            <p className="mb-[15px] text-[12px] leading-[16px] text-[#dbdbdb]">
+            Co-Founder
+            </p>
+            <div className="flex justify-center">
+              <a
+                href="javascript:void(0)"
+                className="transition-all duration-[0.3s] ease-in-out w-[32px] h-[32px] mx-[1px] flex bg-[#73739c26] text-[#fff] hover:bg-[#73739c4d]"
+              >
+                <i className="ri-facebook-fill w-[32px] h-[32px] flex justify-center items-center text-[14px]" />
+              </a>
+              <a
+                href="javascript:void(0)"
+                className="transition-all duration-[0.3s] ease-in-out w-[32px] h-[32px] mx-[1px] flex bg-[#73739c26] text-[#fff] hover:bg-[#73739c4d]"
+              >
+                <i className="ri-twitter-fill w-[32px] h-[32px] flex justify-center items-center text-[14px]" />
+              </a>
+              <a
+                href="javascript:void(0)"
+                className="transition-all duration-[0.3s] ease-in-out w-[32px] h-[32px] mx-[1px] flex bg-[#73739c26] text-[#fff] hover:bg-[#73739c4d]"
+              >
+                <i className="ri-linkedin-fill w-[32px] h-[32px] flex justify-center items-center text-[14px]" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -330,7 +511,7 @@ function Explore(){
                       >
                         About
                       </a>
-                    </li>            
+                    </li>                  
                     <li>
                       <a
                         href="privacy"
@@ -350,7 +531,7 @@ function Explore(){
                     Community
                   </h4>
                   <ul>
-  
+ 
                     <li>
                       <a
                         href="faq"
@@ -380,11 +561,11 @@ function Explore(){
                   <div className="last-footer-copy flex max-[767px]:block justify-between">
                     <div className="max-[767px]:mb-[10px] max-[767px]:flex max-[767px]:justify-center">
                       <p className="text-[14px]">
-                        © <span id="copyright_year" /> NFTAI, All rights reserved.
+                        © NFTAI, All rights reserved.
                       </p>
                     </div>
                     <div className="privacy-contact-copy max-[767px]:flex max-[767px]:justify-center">
-          
+        
                     </div>
                   </div>
                 </div>
@@ -397,4 +578,4 @@ function Explore(){
     )
 }
 
-export default Explore;
+export default About;

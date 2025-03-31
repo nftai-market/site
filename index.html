@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="css/slick.min.css">
     <script src="js/tailwindcss3.4.3.js"></script>
     <link rel="stylesheet" href="css/style.css">
-   
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <style>#in_mobile_menu{z-index:10000;}</style>
   </head>
   <body class="h-auto font-Quicksand text-[14px] font-normal bg-[#000] text-[#777] leading-[26px] tracking-[0.02rem] relative overflow-x-hidden">
     <div id="root"></div>
@@ -26,7 +28,64 @@
     <script src="js/countdown.js"></script>
     <script src="js/slick.min.js"></script>
     <script  src="js/main.js"></script>
- 
+    <script>
+      $(document).ready(function() {
+          let caller;
+      let currentRequestId = 0;
+      let last_run = "";
+
+      $(".explore-input").keyup(function () {
+          let value = $(".explore-input").val();
+
+          if (value !== "") {
+              $(".explore-result").show();
+              $(".explore-result").animate({ height: "350px" }, 100);
+
+              if (value !== last_run) {
+                  $(".explore-result").html(`<p style="color: #603fe5;font-size: 17px;text-align: center;margin-top: 10px;">Exploring galaxies ...</p>`);
+
+                  last_run = value;
+                  clearTimeout(caller);
+                  currentRequestId++;
+                  let requestId = currentRequestId; 
+
+                  caller = setTimeout(function () {
+                      $.get('https://nftai.live/api/nft.php?method=search&search=' + value, function (data) {
+                          if (requestId === currentRequestId) {
+                              let html = "";
+
+                              data.map((d) => {
+                                  if (d["type"] === "account") {
+                                      d["icon"] = d["icon"].replace(" ", "-");
+                                      html += `<a href="https://nftai.live/account?account=${d["text"]}&chain=${d["icon"]}"><div class="item-explore" style="margin-top: 10px;margin-bottom: 10px;display: flex;flex-direction: row;align-content: center;align-items: center;padding: 5px;"><img style="height: 50px;" src="https://nftai.live/img/chain/${d["icon"]}.png"/><p style="color: #20124a;font-size: 15px;padding-left: 15px;">${d["text"]}</p></div></a>`;
+                                  }
+
+                                  if (d["type"] === "nft") {
+                                      html += `<a href="https://nftai.live/contract?contract=${d["contract_address"]}"><div class="item-explore" style="margin-top: 10px;margin-bottom: 10px;display: flex;flex-direction: row;align-content: center;align-items: center;padding: 5px;"><img style="height: 50px;object-fit: cover;width: 50px;background-color: #5f3ee9;%20%20%20border-radius:%205px;" src="${d["logo_url"]}"/><p style="color: #20124a;font-size: 15px;padding-left: 15px;">${d["name"]}<span style="font-size: 11px;margin-left: 5px;color: #4f4f4f;">${d["symbol"]}</span></p></div></a>`;
+                                  }
+                                  
+                                  if (d["type"] === "solana") {
+                                      html += `<a href="https://nftai.live/solana?collection=${d["contract_address"]}"><div class="item-explore" style="margin-top: 10px;margin-bottom: 10px;display: flex;flex-direction: row;align-content: center;align-items: center;padding: 5px;"><img style="height: 50px;object-fit: cover;width: 50px;background-color: #5f3ee9;%20%20%20border-radius:%205px;" src="${d["logo_url"]}"/><p style="color: #20124a;font-size: 15px;padding-left: 15px;">${d["name"]}<span style="font-size: 11px;margin-left: 5px;color: #4f4f4f;">${d["symbol"]}</span></p></div></a>`;
+                                  }
+                              });
+
+                              if (html !== "") {
+                                  $(".explore-result").html(html);
+                              } else {
+                                  $(".explore-result").html(`<p style="color: #603fe5;font-size: 17px;text-align: center;margin-top: 10px;">Not Find.</p>`);
+                              }
+                          }
+                      }, 'json');
+                  }, 1000);
+              }
+          } else {
+              $(".explore-result").animate({ height: "0px" }, 100, function () {
+                  $(".explore-result").hide();
+              });
+          }
+      }); 
+      });
+  </script>
 
 </body>
 </html>
